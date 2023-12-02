@@ -309,8 +309,8 @@ function Home() {
 
   const numberOfWords = randText.join("").split(" ").length;
 
-  // console.log(randText.length, correct);
 
+  
   return (
     <div className="Home">
       <nav className="nav-bar" style={{ width: "100%" }}>
@@ -342,7 +342,6 @@ function Home() {
           <option value="English">English</option>
           <option value="French">French</option>
           <option value="Spanish">Spanish</option>
-          {/* <option value="Chinese">Chinese</option> */}
         </select>
       </div>
 
