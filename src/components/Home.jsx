@@ -324,7 +324,7 @@ function Home() {
           correct={correct}
           incorrect={incorrect}
           accuracy={Number((correct / randText.length) * 100).toFixed(2)}
-          wpm={~~(numberOfWords / 5 / (elapsedTime / 60000))}
+          wpm={Math.round((correct / 5) / (elapsedTime / 60000))}
         />
       )}
 
