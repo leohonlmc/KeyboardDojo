@@ -6,10 +6,9 @@ import Header from "./partial/Header";
 import Footer from "./partial/Footer";
 import Result from "./popup/Result";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faKeyboard } from "@fortawesome/free-solid-svg-icons";
-
 import { Link } from "react-router-dom";
+
+const { REACT_APP_API_ENDPOINT } = process.env;
 
 function Home() {
   const paragraphsEnglish = [
@@ -174,21 +173,19 @@ function Home() {
 
   const [randText, setRandText] = React.useState([]);
   const [randWholeText, setRandWholeText] = React.useState([]);
-
   const [gameover, setGameover] = React.useState(false);
-
   const inputRef = useRef(null);
-
   const [showPopup, setShowPopup] = useState(false);
-
   const activeSpan = useRef(null);
-
   const [language, setLanguage] = useState(
     localStorage.getItem("language") || "English"
   );
   const [text, setText] = useState(`paragraphs${language}`);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [started, setStarted] = useState(false);
+
+  const [wpm, setWpm] = useState(0);
+  const [submit, setSubmit] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("language", language);
@@ -231,12 +228,50 @@ function Home() {
     return () => clearInterval(interval);
   }, [started]);
 
+  useEffect(() => {
+    if (gameover) {
+      const finalScore = calculateScore();
+      console.log("Final Score:", finalScore);
+      setScore(finalScore); // Update the state for displaying in the UI
+
+      // Directly submit the calculated score
+      submitWpm(finalScore);
+    }
+  }, [gameover, randText, elapsedTime]);
+
   function formatTime(ms) {
     const totalSeconds = Math.floor(ms / 1000);
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   }
+
+  const submitWpm = async () => {
+    try {
+      const userId = localStorage.getItem("user");
+      if (!userId) {
+        console.error("User ID not found");
+        return;
+      }
+
+      console.log("Submitting Score:", score);
+
+      const response = await axios.post(
+        `${REACT_APP_API_ENDPOINT}/update/${userId}`,
+        { score: score },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      console.log("Response Data:", response.data);
+      setSubmit(true);
+    } catch (error) {
+      console.error("Error submitting score:", error.response || error);
+    }
+  };
 
   const handleInput = (e) => {
     if (!started) setStarted(true);
@@ -248,6 +283,9 @@ function Home() {
       setShowPopup(false);
     } else {
       setGameover(true);
+      if (submit === false) {
+        submitWpm();
+      }
       setShowPopup(true);
       setStarted(false);
     }
@@ -256,7 +294,6 @@ function Home() {
       if (e.target.value === randText[index]) {
         setCorrect(correct + 1);
         setIndex(index + 1);
-        console.log(randText[index]);
       } else {
         setIncorrect(incorrect + 1);
         setIndex(index + 1);
@@ -286,7 +323,26 @@ function Home() {
     return className;
   };
 
-  const numberOfWords = randText.join("").split(" ").length;
+  const calculateWPM = () => {
+    const totalChars = randText.join("").length;
+    const words = totalChars / 5;
+    const minutes = elapsedTime / 60000;
+    setWpm(words / minutes);
+    return minutes ? words / minutes : 0;
+  };
+
+  const [score, setScore] = useState(0);
+
+  const calculateAccuracy = () => {
+    const totalChars = randText.join("").length;
+    return (correct / totalChars) * 100;
+  };
+
+  const calculateScore = () => {
+    const rawWpm = calculateWPM();
+    const accuracy = calculateAccuracy();
+    return rawWpm * (accuracy / 100);
+  };
 
   return (
     <div className="Home">
@@ -298,7 +354,8 @@ function Home() {
           correct={correct}
           incorrect={incorrect}
           accuracy={Number((correct / randText.length) * 100).toFixed(2)}
-          wpm={~~(numberOfWords / 5 / (elapsedTime / 60000))}
+          wpm={wpm}
+          score={score.toFixed(2)}
         />
       )}
 
