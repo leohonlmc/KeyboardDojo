@@ -31,13 +31,16 @@ function Leaderboard() {
           <div className="ribbon"></div>
           <table>
             <tbody>
-              {leaderboard.map((entry, index) => (
-                <tr key={index}>
-                  <td className="number">{index + 1}</td>
-                  <td className="name">{entry.email}</td>
-                  <td className="points">{entry.score.toFixed(2)}</td>
-                </tr>
-              ))}
+              {leaderboard &&
+                leaderboard.map((entry, index) => (
+                  <tr key={index}>
+                    <td className="number">{index + 1}</td>
+                    <td className="name">{entry.email}</td>
+                    <td className="points">
+                      {entry.score > 0 && entry.score.toFixed(2)}
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
