@@ -1,8 +1,12 @@
 import "../../Header.css";
 import React, { useEffect, useRef, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+
   return (
     <div className="Header">
       <nav className="navbar navbar-expand-lg navbar-light">
@@ -29,15 +33,28 @@ function Header() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <a className="nav-link" href="/leaderboard">
+              <a className="nav-link" href="/#/leaderboard">
                 Leaderboard
               </a>
             </li>
 
             <li className="nav-item">
-              <a className="nav-link" href="/account">
-                Account
-              </a>
+              {token ? (
+                <p
+                  className="nav-link"
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("user");
+                    navigate("/");
+                  }}
+                >
+                  Log Out
+                </p>
+              ) : (
+                <a className="nav-link" href="/#/account">
+                  Account
+                </a>
+              )}
             </li>
           </ul>
         </div>

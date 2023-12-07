@@ -13,6 +13,7 @@
   font-weight: bold;
   margin: 0px 10px;
   transition: color 0.5s ease;
+  cursor: pointer;
 }
 
 .nav-link:hover {
