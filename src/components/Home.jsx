@@ -242,7 +242,7 @@ function Home() {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   }
 
-  const submitWpm = async () => {
+  const submitWpm = async (finalScore) => {
     try {
       const userId = localStorage.getItem("user");
       if (!userId) {
@@ -252,7 +252,7 @@ function Home() {
 
       const response = await axios.post(
         `${REACT_APP_API_ENDPOINT}/update/${userId}`,
-        { score: score },
+        { score: finalScore },
         {
           headers: {
             "Content-Type": "application/json",
@@ -276,7 +276,7 @@ function Home() {
       setShowPopup(false);
     } else {
       setGameover(true);
-      if (submit === false) {
+      if (submit === false && localStorage.getItem("user") === true) {
         submitWpm();
       }
       setShowPopup(true);

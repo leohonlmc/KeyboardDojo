@@ -14,7 +14,6 @@ function Leaderboard() {
       .get(`${REACT_APP_API_ENDPOINT}/leaderboard`)
       .then((res) => {
         setLeaderboard(res.data.users);
-        console.log(res.data);
       })
       .catch((err) => {
         console.error("Error fetching leaderboard:", err);
@@ -31,13 +30,15 @@ function Leaderboard() {
         <div id="leaderboard">
           <div className="ribbon"></div>
           <table>
-            {leaderboard.map((entry, index) => (
-              <tr key={index}>
-                <td className="number">{index + 1}</td>
-                <td className="name">{entry.email}</td>
-                <td className="points">{entry.score.toFixed(2)}</td>
-              </tr>
-            ))}
+            <tbody>
+              {leaderboard.map((entry, index) => (
+                <tr key={index}>
+                  <td className="number">{index + 1}</td>
+                  <td className="name">{entry.email}</td>
+                  <td className="points">{entry.score.toFixed(2)}</td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
       </div>
