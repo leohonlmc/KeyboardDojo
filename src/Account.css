@@ -16,12 +16,14 @@ body {
   left: 50%;
   top: 50%;
 }
+
 .background .shape {
   height: 200px;
   width: 200px;
   position: absolute;
   border-radius: 50%;
 }
+
 .shape:first-child {
   background: linear-gradient(#1845ad, #23a2f6);
   left: -80px;

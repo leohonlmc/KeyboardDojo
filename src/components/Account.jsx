@@ -9,12 +9,12 @@ function Account() {
   const [login, setLogin] = useState(true);
 
   return (
-    <div className="Home">
+    <div className="Home Account">
       <Header />
       {login ? (
         <>
           <div className="background">
-            <div className="shape"></div>
+            <div className=""></div>
             <div className="shape"></div>
           </div>
           <form>

@@ -5,4 +5,16 @@
 
 .icon {
   z-index: 100;
+  cursor: pointer;
+}
+
+.nav-link {
+  color: white;
+  font-weight: bold;
+  margin: 0px 10px;
+  transition: color 0.5s ease;
+}
+
+.nav-link:hover {
+  color: #b8b8b8;
 }
