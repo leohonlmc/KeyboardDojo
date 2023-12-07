@@ -6,8 +6,6 @@ import Header from "./partial/Header";
 import Footer from "./partial/Footer";
 import Result from "./popup/Result";
 
-import { Link } from "react-router-dom";
-
 const { REACT_APP_API_ENDPOINT } = process.env;
 
 function Home() {
@@ -231,10 +229,8 @@ function Home() {
   useEffect(() => {
     if (gameover) {
       const finalScore = calculateScore();
-      console.log("Final Score:", finalScore);
-      setScore(finalScore); // Update the state for displaying in the UI
+      setScore(finalScore);
 
-      // Directly submit the calculated score
       submitWpm(finalScore);
     }
   }, [gameover, randText, elapsedTime]);
@@ -254,8 +250,6 @@ function Home() {
         return;
       }
 
-      console.log("Submitting Score:", score);
-
       const response = await axios.post(
         `${REACT_APP_API_ENDPOINT}/update/${userId}`,
         { score: score },
@@ -266,7 +260,6 @@ function Home() {
           withCredentials: true,
         }
       );
-      console.log("Response Data:", response.data);
       setSubmit(true);
     } catch (error) {
       console.error("Error submitting score:", error.response || error);
