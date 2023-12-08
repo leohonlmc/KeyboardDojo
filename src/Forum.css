@@ -32,3 +32,9 @@ p {
 .chat-area {
   overflow: auto;
 }
+
+.forum-div {
+  background-color: rgb(146, 146, 146);
+  padding: 5px;
+  border-radius: 5px;
+}

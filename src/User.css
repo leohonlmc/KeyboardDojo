@@ -36,9 +36,11 @@ input {
     rgb(4, 4, 4)
   );
   height: 100vh;
+  transition: 0.5s;
 }
 
 .light {
   background-color: rgb(231, 231, 231);
   height: 100vh;
+  transition: 0.5s;
 }
