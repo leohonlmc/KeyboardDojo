@@ -58,6 +58,7 @@ function Account() {
       );
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", data.user);
+      localStorage.setItem("email", data.email);
 
       setTimeout(() => {
         window.location.reload();

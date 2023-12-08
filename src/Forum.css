@@ -1,0 +1,34 @@
+.Forum {
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(57, 57, 57),
+    rgb(4, 4, 4)
+  );
+  padding: 0px;
+  margin: 0px;
+  min-height: 100vh;
+}
+
+p {
+  margin: 0px;
+}
+
+.forum-div {
+  width: 90%;
+  margin: auto;
+}
+
+.chat-area {
+  height: 500px;
+}
+
+.chat-div {
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.chat-area {
+  overflow: auto;
+}

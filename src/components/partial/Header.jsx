@@ -38,18 +38,17 @@ function Header() {
               </a>
             </li>
 
+            <li className="nav-item active">
+              <a className="nav-link" href="/#/forum">
+                Forum
+              </a>
+            </li>
+
             <li className="nav-item">
               {token ? (
-                <p
-                  className="nav-link"
-                  onClick={() => {
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("user");
-                    navigate("/");
-                  }}
-                >
-                  Log Out
-                </p>
+                <a className="nav-link" href="/#/user">
+                  User
+                </a>
               ) : (
                 <a className="nav-link" href="/#/account">
                   Account
