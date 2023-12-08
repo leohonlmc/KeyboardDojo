@@ -11,10 +11,10 @@ function Forum() {
   const navigate = useNavigate();
 
   const [chat, setChat] = useState([]);
-  const [inputValue, setInputValue] = useState(""); // New state for handling input
+  const [inputValue, setInputValue] = useState("");
 
   const handleChat = (e) => {
-    setInputValue(e.target.value); // Update input value instead of chat
+    setInputValue(e.target.value);
   };
 
   const submitChat = () => {
@@ -26,6 +26,17 @@ function Forum() {
       })
       .then((res) => {
         console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const deleteChat = (id) => {
+    axios
+      .delete(`${REACT_APP_API_ENDPOINT}/api/chat/${id}`)
+      .then((res) => {
+        alert("Chat deleted");
       })
       .catch((err) => {
         console.log(err);
@@ -50,7 +61,7 @@ function Forum() {
       fetchChat();
     }, 100);
 
-    return () => clearInterval(intervalId); // Clear interval on unmount
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
@@ -62,12 +73,24 @@ function Forum() {
 
         <div className="mid col-md-12 ">
           <div className="chat-area">
-            {chat.map((item) => {
+            {chat.map((item, index) => {
               return (
-                <div className="chat-div">
+                <div className="chat-div" key={item._id}>
                   <div className="chat-user">
                     <p>{item.email}</p>
                     <p>{item.chat}</p>
+                    <div className="delete-btn">
+                      {localStorage.getItem("user") ===
+                      "657145aa721b4e6732c535c6" ? (
+                        <button
+                          className="btn btn-danger"
+                          style={{ margin: "0px" }}
+                          onClick={() => deleteChat(item._id)}
+                        >
+                          Delete
+                        </button>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
               );

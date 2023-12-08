@@ -38,3 +38,11 @@ p {
   padding: 5px;
   border-radius: 5px;
 }
+
+.delete-btn {
+  margin: 0px;
+  width: 70px;
+  font-size: 15px;
+  margin-right: 0px;
+  margin-left: auto;
+}
