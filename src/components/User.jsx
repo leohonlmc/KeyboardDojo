@@ -45,7 +45,11 @@ function User() {
 
         <input type="text" value={user._id} disabled="true" />
         <input type="text" value={user.email} disabled="true" />
-        <input type="text" value={~~user.score} disabled="true" />
+        <input
+          type="text"
+          value={`Current score: ${~~user.score}`}
+          disabled="true"
+        />
 
         <div className="mode">
           <span onClick={() => setMode("light")}>Light</span>
