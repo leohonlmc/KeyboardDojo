@@ -10,6 +10,10 @@ style="width: 250px"
 
 KeyboardDojo is a dynamic and engaging typing game website designed to improve typing skills while offering a competitive and social environment. This project integrates a typing game, user forum, leaderboard, and account management, providing a comprehensive platform for typing enthusiasts.
 
+## Website
+
+KeyboardDojo is a dynamic and engaging typing game website designed to improve typing skills while offering a competitive and social environment. Visit the live site here: [KeyboardDojo](https://keyboarddojo.onrender.com).
+
 ## Features
 
 - **Home Page**: A welcoming page that introduces users to KeyboardDojo and directs them to the main features.
@@ -44,11 +48,7 @@ The application should now be running on `http://localhost:3000`.
 
 ## Contributing
 
-We welcome contributions! Please read our [Contributing Guidelines](LINK_TO_CONTRIBUTING_GUIDELINES) for more information.
-
-## License
-
-This project is licensed under the [MIT License](LINK_TO_LICENSE).
+We welcome contributions!
 
 ## Contact
 
