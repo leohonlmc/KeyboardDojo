@@ -1,7 +1,7 @@
 # KeyboardDojo
 
 <img
-src="/KeyboardDojo_1.png"
+src="./public/KeyboardDojo_1.png"
 alt=""
 style="width: 250px"
 />
