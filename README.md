@@ -1,10 +1,9 @@
 # KeyboardDojo
 
 <img
-className="icon"
 src="/KeyboardDojo_1.png"
 alt=""
-style={{ width: "250px" }}
+style="width: 250px"
 />
 
 ## Project Description
